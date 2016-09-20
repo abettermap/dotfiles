@@ -9,6 +9,6 @@
 - grunt-cli
 
 # RUBY
-rvm
-sass
-scss_lint
+- rvm
+- sass
+- scss_lint
