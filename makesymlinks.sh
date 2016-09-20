@@ -8,7 +8,7 @@
 
 dir=~/dotfiles                    # dotfiles directory
 olddir=~/dotfiles_old             # old dotfiles backup directory
-files="bashrc vimrc vim zshrc oh-my-zsh"    # list of files/folders to symlink in homedir
+files="bashrc bash_profile profile vimrc vim profile npmrc"    # list of files/folders to symlink in homedir
 
 ##########
 
@@ -29,3 +29,10 @@ for file in $files; do
     echo "Creating symlink to $file in home directory."
     ln -s $dir/$file ~/.$file
 done
+
+# clone vim color schemes
+cd vim
+git clone https://github.com/flazz/vim-colorschemes.git
+cp -r ~/dotfiles/vim/vim-colorschemes/colors/ ~/dotfiles/vim/colors
+ls -la ~/dotfiles/vim/vim-colorschemes/colors
+unlink ~/dotfiles/vim/vim
