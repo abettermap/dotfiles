@@ -5,6 +5,9 @@ alias httpserv='http-server -o'
 alias phpserv='php -S localhost:8005'
 alias fixpboard='quit "Google Chrome" && quit "Sublime Text" && closepboard && open "/Applications/Google Chrome.app" && open "/Applications/Sublime Text.app"'
 
+## Git log with branch illustration
+alias gitgraph='git log --graph --abbrev-commit --decorate --date=relative --all'
+
 ## CLEAN VIEW OF PATH ##
 function path(){
     old=$IFS
