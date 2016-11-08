@@ -1,6 +1,9 @@
 ## GDAL ##
 export PATH=/Library/Frameworks/GDAL.framework/Versions/1.11/Programs:$PATH
 
+## GEOGIG ##
+export PATH=$HOME/resources/applications/geogig/bin:$PATH ## had errors
+
 ## JAVA HOME ##
 # export JAVA_HOME=$(/usr/libexec/java_home)
 # export PATH=/System/Library/Frameworks/JavaVM.framework/Versions/Current/Commands:$PATH
