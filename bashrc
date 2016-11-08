@@ -1,6 +1,7 @@
 ### ALIASES ###
 alias ubuntu_ssh='ssh -p 3022 jason@127.0.0.1'
 alias pyserv='python -m SimpleHTTPServer'
+alias httpserv='http-server -o'
 alias phpserv='php -S localhost:8005'
 alias fixpboard='quit "Google Chrome" && quit "Sublime Text" && closepboard && open "/Applications/Google Chrome.app" && open "/Applications/Sublime Text.app"'
 
