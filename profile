@@ -1,26 +1,19 @@
-## GDAL ##
+### GDAL ###
 export PATH=/Library/Frameworks/GDAL.framework/Versions/1.11/Programs:$PATH
 
-## JAVA HOME ##
-# export JAVA_HOME=$(/usr/libexec/java_home)
-# export PATH=/System/Library/Frameworks/JavaVM.framework/Versions/Current/Commands:$PATH
-# export PATH=$JAVA_HOME/jre/bin:$PATH
+### RUBY ###
 
-## HOMEBREW ##
-# export PATH=/Users/travelampel/usr/local/bin:$PATH
-# export HOMEBREW_PREFIX=/Users/travelampel/usr/local
+# Load RVM into a shell session *as a function*
+[[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm" 
 
-## RUBY ##
-[[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm" # Load RVM into a shell session *as a function*
-export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting
+# Add RVM to PATH for scripting
+export PATH="$PATH:$HOME/.rvm/bin" 
 PATH="$(ruby -e 'print Gem.user_dir')/bin:$PATH"
 
-## NODE ##
+### NODE ###
 NPM_PACKAGES=/Users/travelampel/npm-global
 NODE_PATH="$NPM_PACKAGES/lib/node_modules:$NODE_PATH"
 PATH="$NPM_PACKAGES/bin:$PATH"
 
-## CUSTOM ##
+### CUSTOM ###
 source ~/dotfiles/.aliases
-# bash ~/dotfiles/.aliases
-# for f in ~/dotfiles*; do source "$f"; done
