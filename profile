@@ -20,6 +20,3 @@ export NVM_DIR="~/.nvm"
 
 # Set node version via nvm
 nvm alias default 5.12.0
-
-### CUSTOM ###
-source ~/dotfiles/.aliases
