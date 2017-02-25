@@ -11,7 +11,7 @@ export PATH="$PATH:$HOME/.rvm/bin"
 PATH="$(ruby -e 'print Gem.user_dir')/bin:$PATH"
 
 ### NODE ###
-NPM_PACKAGES=/Users/travelampel/npm-global
+NPM_PACKAGES=~/npm-global
 NODE_PATH="$NPM_PACKAGES/lib/node_modules:$NODE_PATH"
 PATH="$NPM_PACKAGES/bin:$PATH"
 
