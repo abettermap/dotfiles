@@ -15,8 +15,12 @@ NPM_PACKAGES=~/npm-global
 NODE_PATH="$NPM_PACKAGES/lib/node_modules:$NODE_PATH"
 PATH="$NPM_PACKAGES/bin:$PATH"
 
-export NVM_DIR="~/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
-
-# Set node version via nvm
-nvm alias default 5.12.0
+if hash nvm 2>/dev/null; then
+    export NVM_DIR="~/.nvm"
+    [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
+    
+    # Set node version via nvm
+    nvm alias default 5.12.0
+else
+    echo "no nvm installed"
+fi
