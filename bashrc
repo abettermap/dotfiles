@@ -2,6 +2,15 @@
 alias pyserv='python -m SimpleHTTPServer'
 alias phpserv='php -S localhost:8005'
 
+### VIEW MOST RECENT COMMANDS ###
+alias freq='cut -f1 -d" " ~/.bash_history | sort | uniq -c | sort -nr | head -n 30'
+
+### REMOVE ICONR FILES  ###
+alias rm_icon="find . -name "Icon*" -type f -delete"
+
+### CHECK TEMPERATURE ###
+alias check_temp='~/Desktop/osx-cpu-temp/./osx-cpu-temp'
+
 ## CLEAN VIEW OF PATH ##
 function path(){
     old=$IFS
