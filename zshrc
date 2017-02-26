@@ -131,9 +131,12 @@ ZSH_THEME="robbyrussell"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git brew grunt node npm docker tmux vagrant)
+plugins=(git brew zsh-nvm grunt docker tmux vagrant)
 
 source $ZSH/oh-my-zsh.sh
+
+# nvm problems
+nvm use --delete-prefix v5.12.0 --silent
 
 # User configuration
 
