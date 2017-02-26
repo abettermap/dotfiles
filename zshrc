@@ -1,3 +1,83 @@
+### FROM .profile
+
+###############
+#### ENV ###### 
+###############
+
+### GDAL ###
+export PATH=/Library/Frameworks/GDAL.framework/Versions/1.11/Programs:$PATH
+
+### RUBY ###
+# Load RVM into a shell session *as a function*
+[[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm" 
+
+# Add RVM to PATH for scripting
+export PATH="$PATH:$HOME/.rvm/bin" 
+PATH="$(ruby -e 'print Gem.user_dir')/bin:$PATH"
+
+### NODE ###
+export PATH=~/npm-global/bin:$PATH
+#NPM_PACKAGES=~/npm-global
+#NODE_PATH="$NPM_PACKAGES/lib/node_modules:$NODE_PATH"
+#PATH="$NPM_PACKAGES/bin:$PATH"
+### END .profile ###
+
+# Use specific version of node via nvm
+# export NVM_DIR="~/.nvm"
+# [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  
+
+# nvm alias default 5.12.0
+
+if hash nvm 2>/dev/null; then    
+    # Set node version via nvm
+    echo "we have nvm"
+else
+    # echo "no nvm installed"
+fi
+
+### START .bashrc ###
+
+###############
+### ALIASES ###
+###############
+alias pyserv='python -m SimpleHTTPServer'
+alias phpserv='php -S localhost:8005'
+
+### VIEW MOST RECENT COMMANDS ###
+alias freq='cut -f1 -d" " ~/.bash_history | sort | uniq -c | sort -nr | head -n 30'
+
+### CHECK TEMPERATURE ###
+alias check_temp='~/Desktop/osx-cpu-temp/./osx-cpu-temp'
+
+#################
+### FUNCTIONS ###
+#################
+
+### REMOVE ICONR FILES  ###
+function rm_icon() {
+  find . -name "Icon*" -type f -delete
+}
+
+## CLEAN VIEW OF PATH ##
+function path(){
+    echo $PATH | tr -s ':' '\n'
+}
+
+## CLOSE APPLICATION ##
+function quit {
+osascript <<EOF
+  tell application "$*" to quit
+EOF
+}
+
+## CLOSE CLIPBOARD ##
+function closepboard {
+    eval ps aux | grep '[p]board'| `awk '{ print "kill " $2 }'`
+}
+
+### END .bashrc ### 
+
+### START ZSHRC ###
 # If you come from bash you might have to change your $PATH.
 export PATH=$HOME/bin:/usr/local/bin:$PATH
 
