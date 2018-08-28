@@ -1,161 +1,180 @@
-### FROM .profile
+emojify ":sunglasses: :sunglasses: :sunglasses: :sunglasses:"
+echo ''
 
-###############
-#### ENV ###### 
-###############
+### ZSH CONFIGURATION ###
+# User configuration
+DEFAULT_USER="travelampel"
 
-### GDAL ###
-export PATH=/Library/Frameworks/GDAL.framework/Versions/1.11/Programs:$PATH
+# Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
+# Add wisely, as too many plugins slow down shell startup.
+plugins=(git php docker grunt)
 
-### RUBY ###
-# Load RVM into a shell session *as a function*
-[[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm" 
+# Powerline theme
+POWERLEVEL9K_HOME_SUB_ICON=
+POWERLEVEL9K_MODE='awesome-patched'
+ZSH_THEME="powerlevel9k/powerlevel9k"
 
-# Add RVM to PATH for scripting
-export PATH="$PATH:$HOME/.rvm/bin" 
+POWERLEVEL9K_VCS_STAGED_ICON='\u00b1'
+POWERLEVEL9K_VCS_UNTRACKED_ICON='\u25CF'
+POWERLEVEL9K_VCS_UNSTAGED_ICON='\u00b1'
+POWERLEVEL9K_VCS_INCOMING_CHANGES_ICON='\u2193'
+POWERLEVEL9K_VCS_OUTGOING_CHANGES_ICON='\u2191'
+POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(status os_icon context dir vcs)
+POWERLEVEL9K_PROMPT_ON_NEWLINE=true
+POWERLEVEL9K_SHORTEN_DIR_LENGTH=2
+
+# Syntax highlighting
+source /usr/local/Cellar/zsh-syntax-highlighting/0.6.0/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+
+### PATH SETUP, EXPORTS ###
+# If you come from bash you might have to change your $PATH.
+# export PATH=$HOME/bin:/usr/local/bin:$PATH
+
+# Path to oh-my-zsh installation
+export ZSH=/Users/travelampel/.oh-my-zsh
+
+# Python
+export PYTHONPATH=/Applications/QGIS.app/Contents/Resources/python/
+
+# GDAL
+export PATH=/usr/local/Cellar/gdal2/2.1.3_2/bin:$PATH
+
+# QT (QMAKE) via Homebrew
+export PATH=/usr/local/Cellar/qt5/5.8.0_1/bin:$PATH
+
+# PHPBREW
+export PATH=$HOME/resources:$PATH
+
+## RUBY ##
+[[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm" # Load RVM into a shell session *as a function*
+export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting
 PATH="$(ruby -e 'print Gem.user_dir')/bin:$PATH"
 
-### NODE ###
-export PATH=~/npm-global/bin:$PATH
-#NPM_PACKAGES=~/npm-global
-#NODE_PATH="$NPM_PACKAGES/lib/node_modules:$NODE_PATH"
-#PATH="$NPM_PACKAGES/bin:$PATH"
-### END .profile ###
+test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
 
-# Use specific version of node via nvm
-# export NVM_DIR="~/.nvm"
-# [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  
+## NODE ##
+NPM_PACKAGES=/Users/travelampel/npm-global
+# export PATH=~/npm-global/bin:$PATH
+NODE_PATH="$NPM_PACKAGES/lib/node_modules:$NODE_PATH"
+# PATH="$NPM_PACKAGES/bin:$PATH"
 
-# nvm alias default 5.12.0
+source $ZSH/oh-my-zsh.sh
 
-if hash nvm 2>/dev/null; then    
-    # Set node version via nvm
-    echo "we have nvm"
-else
-    # echo "no nvm installed"
-fi
-
-### START .bashrc ###
-
-###############
 ### ALIASES ###
-###############
 alias pyserv='python -m SimpleHTTPServer'
+alias httpserv='http-server -o'
 alias phpserv='php -S localhost:8005'
+alias recent='fc -l -20'
 
-### VIEW MOST RECENT COMMANDS ###
-alias freq='cut -f1 -d" " ~/.bash_history | sort | uniq -c | sort -nr | head -n 30'
+## PROJECT ALIASES ##
+alias wfmap='cd ~/projects/wfmis/git/wfmis-gitlab/ && gfa'
+alias dta='cd ~/projects/gismo/git-repos/AK-landing/akgismo-mobile-app/ak-landing-page-src/DTA && gfa'
+alias fwa='cd ~/projects/gismo/git-repos/AK-landing/akgismo-mobile-app/ak-landing-page-src/FWA && gfa'
+alias jber='cd ~/projects/gismo/git-repos/AK-landing/akgismo-mobile-app/ak-landing-page-src/JBER && gfa'
+alias akgismo='cd ~/projects/gismo/git-repos/AK-landing/akgismo-mobile-app/ak-landing-page-src && gfa'
+alias higismo='cd ~/projects/gismo/git-repos/hi-landing && gfa'
+alias hisfc='cd ~/projects/soldier-field-cards/HISFC-repo && gfa'
 
-### CHECK TEMPERATURE ###
-alias check_temp='~/Desktop/osx-cpu-temp/./osx-cpu-temp'
+# Get on `dev` branch, pull, cleanup, list branches
+alias gitdev='gfa && gco dev && gl && gbda && gb'
 
-#################
+#############################################################
+#       Docker cleanup aliases (all begin with `drm`)       #
+#############################################################
+
+# Remove dangling images, volumes, stopped containers
+alias drmsc='docker rm $(docker ps -a -q)'
+
+# Remove dangling volumes
+alias drmdv='docker volume rm $(docker volume ls -qf dangling=true)'
+
+# Remove dangling images
+alias drmdi='docker rmi $(docker images -q --filter "dangling=true")' 
+
+# Remove network/s
+alias drmn='docker network rm'
+
+# Show all containers
+alias dpsa='docker ps -a'
+
+# List networks
+alias dnls='docker network ls'
+
+#############################################################
+#   Docker compose aliases (all commands start with `dc`)   #
+#############################################################
+
+alias dcb='docker-compose build'
+alias dcd='docker-compose down'
+alias dcu='docker-compose up'
+alias dcud='docker-compose up -d'
+alias dcub='docker-compose up --build'
+
+#############################################################
+#                   Misc. Docker aliases                    #
+#############################################################
+
+# Sort images alphabetically
+alias dimg='docker images | sort'
+
+# Start portainer GUI
+alias dock-portainer='docker run -d -p 9000:9000 -v /var/run/docker.sock:/var/run/docker.sock portainer/portainer'
+
+# Enter container as root (replace 'mycontainer')
+# docker exec -u 0 -it mycontainer bash
+
+# Git log with branch illustration
+alias gitgraph='git log --graph --abbrev-commit --decorate --date=relative --all'
+# Nice short git log (overrides zsh git plugin, which does `git log --stat`)
+# Cred: https://coderwall.com/p/euwpig/a-better-git-log
+alias glg="git log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit"
+
+# Show global npm modules
+alias npm-ls-global='npm ls -g --depth=0'
+
+# Show hidden files in Finder ##
+alias show-hidden='defaults write com.apple.finder AppleShowAllFiles YES'
+
+# SSH into ACNS dev site
+alias ssh_acns="ssh 'cwis103@webhost0.acns.colostate.edu'"
+
+
 ### FUNCTIONS ###
-#################
 
-### REMOVE ICONR FILES  ###
-function rm_icon() {
-  find . -name "Icon*" -type f -delete
+# GISMO viewing
+function gismo(){
+  gismo_path="$HOME/projects/gismo/git-repos/$1/development"
+
+  cd "$gismo_path" && http-server -o
 }
 
-## CLEAN VIEW OF PATH ##
+# CLEAN VIEW OF PATH
 function path(){
-    echo $PATH | tr -s ':' '\n'
+  echo $PATH | tr -s ':' '\n'
 }
 
-## CLOSE APPLICATION ##
+# CLOSE APPLICATION
 function quit {
 osascript <<EOF
   tell application "$*" to quit
 EOF
 }
 
-## CLOSE CLIPBOARD ##
+# CLOSE CLIPBOARD
 function closepboard {
     eval ps aux | grep '[p]board'| `awk '{ print "kill " $2 }'`
 }
 
-### END .bashrc ### 
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+nvm use --delete-prefix v8.11.1 --silent
+#nvm use --delete-prefix v6.11.3 --silent
 
-### START ZSHRC ###
-# If you come from bash you might have to change your $PATH.
-#export PATH=$HOME/bin:/usr/local/bin:$PATH
+# Add Visual Studio Code (code)
+export PATH="$PATH:/Users/travelampel/resources/applications/Visual Studio Code.app/Contents/Resources/app/bin"
 
-# Path to your oh-my-zsh installation.
-export ZSH=~/.oh-my-zsh
-
-# Set name of the theme to load. Optionally, if you set this to "random"
-# it'll load a random theme each time that oh-my-zsh is loaded.
-# See https://github.com/robbyrussell/oh-my-zsh/wiki/Themes
-ZSH_THEME="robbyrussell"
-
-# Uncomment the following line to use case-sensitive completion.
-# CASE_SENSITIVE="true"
-
-# Uncomment the following line to use hyphen-insensitive completion. Case
-# sensitive completion must be off. _ and - will be interchangeable.
-# HYPHEN_INSENSITIVE="true"
-
-# Uncomment the following line to disable bi-weekly auto-update checks.
-# DISABLE_AUTO_UPDATE="true"
-
-# Uncomment the following line to change how often to auto-update (in days).
-# export UPDATE_ZSH_DAYS=13
-
-# Uncomment the following line to disable colors in ls.
-# DISABLE_LS_COLORS="true"
-
-# Uncomment the following line to disable auto-setting terminal title.
-# DISABLE_AUTO_TITLE="true"
-
-# Uncomment the following line to enable command auto-correction.
-# ENABLE_CORRECTION="true"
-
-# Uncomment the following line to display red dots whilst waiting for completion.
-# COMPLETION_WAITING_DOTS="true"
-
-# Uncomment the following line if you want to disable marking untracked files
-# under VCS as dirty. This makes repository status check for large repositories
-# much, much faster.
-# DISABLE_UNTRACKED_FILES_DIRTY="true"
-
-# Uncomment the following line if you want to change the command execution time
-# stamp shown in the history command output.
-# The optional three formats: "mm/dd/yyyy"|"dd.mm.yyyy"|"yyyy-mm-dd"
-# HIST_STAMPS="mm/dd/yyyy"
-
-# Would you like to use another custom folder than $ZSH/custom?
-# ZSH_CUSTOM=/path/to/new-custom-folder
-
-# Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
-# Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
-# Example format: plugins=(rails git textmate ruby lighthouse)
-# Add wisely, as too many plugins slow down shell startup.
-plugins=(git brew zsh-nvm grunt docker tmux vagrant)
-
-source $ZSH/oh-my-zsh.sh
-
-# nvm problems
-nvm use --delete-prefix v5.12.0 --silent
-
-# User configuration
-
-# export MANPATH="/usr/local/man:$MANPATH"
-
-# You may need to manually set your language environment
-# export LANG=en_US.UTF-8
-
-# Preferred editor for local and remote sessions
-# if [[ -n $SSH_CONNECTION ]]; then
-#   export EDITOR='vim'
-# else
-#   export EDITOR='mvim'
-# fi
-
-# Compilation flags
-# export ARCHFLAGS="-arch x86_64"
-
-# ssh
-# export SSH_KEY_PATH="~/.ssh/rsa_id"
-
-## END ZSHRC ###
+# Android/Java stuff
+export JAVA_HOME=$(/usr/libexec/java_home)
+export ANDROID_HOME=/Users/travelampel/Library/Android/sdk
+export PATH=$PATH:$ANDROID_HOME/tools:$ANDROID_HOME/platform-tools
