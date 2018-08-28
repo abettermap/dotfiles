@@ -1,3 +1,7 @@
 vim/colors
-gitconfig
+vim/.netrwhist
+vim/autoload/*
+vim/bundle/*
+
 device-specific
+gitconfig

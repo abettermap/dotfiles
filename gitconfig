@@ -6,3 +6,32 @@
   hist = log --pretty=format:\"%h %ad | %s%d [%an]\" --graph --date=short
   type = cat-file -t
   dump = cat-file -p
+[user]
+	name = Jason Lampel
+	email = jlampel@colostate.edu
+[difftool "sourcetree"]
+	cmd = opendiff \"$LOCAL\" \"$REMOTE\"
+	path = 
+[merge]
+  keepBackup = false
+	tool = p4merge
+[mergetool "p4merge"]
+  cmd = /Applications/p4merge.app/Contents/Resources/launchp4merge "\"$PWD/$BASE\"" "\"$PWD/$LOCAL\""  "\"$PWD/$REMOTE\"" "\"$PWD/$MERGED\""   
+	keepTemporaries = false
+	trustExitCode = false
+	keepBackup = false
+[core]
+	excludesfile = /Users/travelampel/.gitignore_global
+	editor = vim
+	autocrlf = input
+[commit]
+	template = /Users/travelampel/.stCommitMsg
+[log]
+	abbrevCommit = true
+[format]
+        pretty = format:%C(yellow)%h %C(green)%cr %C(cyan)%an %Creset%s
+[mergetool "sourcetree"]
+	cmd = /Applications/SourceTree.app/Contents/Resources/opendiff-w.sh \"$LOCAL\" \"$REMOTE\" -ancestor \"$BASE\" -merge \"$MERGED\"
+	trustExitCode = true
+[http]
+	postBuffer = 524288000
