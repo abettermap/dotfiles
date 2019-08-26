@@ -161,6 +161,11 @@ map Y y$
 " next search
 nnoremap <C-L> :nohl<CR><C-L>
 
+" Save left pinky- remap ESC key!
+inoremap jk <esc>
+" And force its use:
+inoremap <esc> <nop>
+
 " Switch between panes with single combo like Ctrl+j
 map <C-J> <C-W>j<C-W>_
 map <C-K> <C-W>k<C-W>_

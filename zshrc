@@ -67,13 +67,16 @@ alias phpserv='php -S localhost:8005'
 alias recent='fc -l -20'
 
 ## PROJECT ALIASES ##
-alias wfmap='cd ~/projects/wfmis/git/wfmis-gitlab/ && gfa'
-alias dta='cd ~/projects/gismo/git-repos/AK-landing/akgismo-mobile-app/ak-landing-page-src/DTA && gfa'
-alias fwa='cd ~/projects/gismo/git-repos/AK-landing/akgismo-mobile-app/ak-landing-page-src/FWA && gfa'
-alias jber='cd ~/projects/gismo/git-repos/AK-landing/akgismo-mobile-app/ak-landing-page-src/JBER && gfa'
-alias akgismo='cd ~/projects/gismo/git-repos/AK-landing/akgismo-mobile-app/ak-landing-page-src && gfa'
-alias higismo='cd ~/projects/gismo/git-repos/hi-landing && gfa'
-alias hisfc='cd ~/projects/soldier-field-cards/HISFC-repo && gfa'
+alias gismo='clear && cd ~/projects/gismo/gismo-core && gfa && code .'
+alias wfmap='clear && cd ~/projects/wfmis/repo && gfa && code .'
+alias ak-landing='clear && cd ~/projects/gismo/akgismo-app-and-gismo/ak-landing-page-src && gfa && code .'
+alias arnglanding='clear && cd ~/projects/gismo/arng-landing && gfa && code .'
+alias hisfc='clear && cd ~/projects/soldier-field-cards/HISFC-repo && gfa && code .'
+alias popups='clear && cd ~/projects/field-popups/vafb-erosion && gfa && code . && grunt'
+alias eagles='clear && cd ~/projects/golden-eagles && gfa && code .'
+alias tribal='clear && cd ~/projects/other/tribal-lands-map && gfa && code .'
+alias rangefinder='clear && cd ~/projects/gismo/not-super-gismo && gfa && code .'
+alias field-viewer='clear && cd ~/projects/field-data-viewer && gfa && code .'
 
 # Get on `dev` branch, pull, cleanup, list branches
 alias gitdev='gfa && gco dev && gl && gbda && gb'
@@ -93,6 +96,9 @@ alias drmdi='docker rmi $(docker images -q --filter "dangling=true")'
 
 # Remove network/s
 alias drmn='docker network rm'
+
+# Show running containers
+alias dps='docker ps'
 
 # Show all containers
 alias dpsa='docker ps -a'
@@ -141,13 +147,6 @@ alias ssh_acns="ssh 'cwis103@webhost0.acns.colostate.edu'"
 
 ### FUNCTIONS ###
 
-# GISMO viewing
-function gismo(){
-  gismo_path="$HOME/projects/gismo/git-repos/$1/development"
-
-  cd "$gismo_path" && http-server -o
-}
-
 # CLEAN VIEW OF PATH
 function path(){
   echo $PATH | tr -s ':' '\n'
@@ -168,8 +167,8 @@ function closepboard {
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
-nvm use --delete-prefix v8.11.1 --silent
-#nvm use --delete-prefix v6.11.3 --silent
+nvm use --delete-prefix 10.15.1 --silent
+#nvm use --delete-prefix v8.11.1 --silent
 
 # Add Visual Studio Code (code)
 export PATH="$PATH:/Users/travelampel/resources/applications/Visual Studio Code.app/Contents/Resources/app/bin"
@@ -178,3 +177,5 @@ export PATH="$PATH:/Users/travelampel/resources/applications/Visual Studio Code.
 export JAVA_HOME=$(/usr/libexec/java_home)
 export ANDROID_HOME=/Users/travelampel/Library/Android/sdk
 export PATH=$PATH:$ANDROID_HOME/tools:$ANDROID_HOME/platform-tools
+
+export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
