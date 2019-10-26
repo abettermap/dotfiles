@@ -8,12 +8,8 @@
 
 dir=~/dotfiles                    # dotfiles directory
 olddir=~/dotfiles_old             # old dotfiles backup directory
-<<<<<<< Updated upstream
 # list of files/folders to symlink in homedir
-files="bashrc gitconfig bash_profile profile vimrc vim profile npmrc zshrc oh-my-zsh"    
-=======
-files="bashrc gitconfig bash_profile profile vimrc vim profile npmrc zshrc"    # list of files/folders to symlink in homedir
->>>>>>> Stashed changes
+files="bashrc gitconfig bash_profile profile vimrc vim profile npmrc zshrc oh-my-zsh gitignore_global"
 
 ##########
 
@@ -27,7 +23,7 @@ echo "Changing to the $dir directory"
 cd $dir
 echo "...done"
 
-# move any existing dotfiles in homedir to dotfiles_old directory, then create symlinks 
+# move any existing dotfiles in homedir to dotfiles_old directory, then create symlinks
 for file in $files; do
     echo "Moving any existing dotfiles from ~ to $olddir"
     mv ~/.$file ~/dotfiles_old/

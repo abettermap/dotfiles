@@ -11,7 +11,7 @@
 	email = jlampel@colostate.edu
 [difftool "sourcetree"]
 	cmd = opendiff \"$LOCAL\" \"$REMOTE\"
-	path =
+	path = 
 [merge]
   keepBackup = false
 	tool = p4merge
